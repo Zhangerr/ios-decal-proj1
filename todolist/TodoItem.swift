@@ -6,6 +6,7 @@
 //  Copyright © 2015 Alex Zhang. All rights reserved.
 //
 
+import UIKit
 import Foundation
  class TodoItem: NSObject, NSCoding {
      var item:String
@@ -34,6 +35,15 @@ import Foundation
     //used for testing purposes instead of expired
     var expiredTest: Bool {
         return completed && (timestamp.timeIntervalSinceNow <  -5)
+    }
+    
+    func getAttributeString() -> NSAttributedString {
+        var attributes = [String: AnyObject]()
+        if self.completed {
+            attributes[NSStrikethroughStyleAttributeName] = 1
+            attributes[NSForegroundColorAttributeName] = UIColor.grayColor()
+        }
+        return NSAttributedString(string: item, attributes: attributes)
     }
     
     func encodeWithCoder(aCoder: NSCoder) {
