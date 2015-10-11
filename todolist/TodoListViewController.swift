@@ -93,18 +93,35 @@ class TodoListViewController: UITableViewController, TodoDelegate {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell")
         let item = todoItems[indexPath.row]
         cell?.textLabel?.attributedText = item.getAttributeString()
+        if item.completed {
+            cell?.backgroundColor = UIColorGrayWhite()
+            cell?.contentView.backgroundColor = UIColorGrayWhite()
+        } else {
+            cell?.backgroundColor = UIColor.whiteColor()
+            cell?.contentView.backgroundColor = UIColor.whiteColor()
+        }
         return cell!
         
     }
+    func UIColorFromRGB(rgbValue: UInt) -> UIColor {
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
+    }
+    func UIColorGrayWhite() -> UIColor {
+        return UIColorFromRGB(0xeeeeee)
+    }
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: false)
         let item = todoItems[indexPath.row]
         item.completed = !item.completed
-        let cell:UITableViewCell = self.tableView.cellForRowAtIndexPath(indexPath)!
         if item.completed {
             item.timestamp = NSDate()
         }
-        cell.textLabel?.attributedText = item.getAttributeString()
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        tableView.reloadData()
         saveTodos()
     }
 

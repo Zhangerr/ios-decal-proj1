@@ -38,11 +38,15 @@ class AddViewController : UIViewController, UITextFieldDelegate {
         
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var addTextField: FormTextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         addTextField.becomeFirstResponder()
         addTextField.delegate = self
+    }
+    @IBAction func textFieldDidChange(sender: AnyObject) {
+        checkValidTodoItem()
     }
     override func viewDidLayoutSubviews() {
         addTextField.borderStyle = UITextBorderStyle.None
@@ -55,9 +59,17 @@ class AddViewController : UIViewController, UITextFieldDelegate {
         topLayer.backgroundColor = UIColor.grayColor().CGColor
     }
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        delegate?.addedTodo(addTextField.text!, detail: "")
-        self.dismissViewControllerAnimated(true, completion: nil)
-        return true
+        if !(addTextField.text ?? "").isEmpty {
+            delegate?.addedTodo(addTextField.text!, detail: "")
+            self.dismissViewControllerAnimated(true, completion: nil)
+            return true
+        } else {
+            return false
+        }
+    }
+    func checkValidTodoItem() {
+        let text = addTextField.text ?? ""
+        saveButton.enabled = !text.isEmpty
     }
     
 }

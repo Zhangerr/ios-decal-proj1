@@ -121,17 +121,20 @@
                                         <real key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="textFieldDidChange:" destination="jy6-ar-zBd" eventType="editingChanged" id="dbk-jI-mwP"/>
+                                </connections>
                             </textField>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B3T-hF-diF">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
-                                    <navigationItem title="Title" id="QUj-Wq-6UK">
+                                    <navigationItem title="New Todo" id="QUj-Wq-6UK">
                                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="pCb-KS-bZ1">
                                             <connections>
                                                 <action selector="backButtonAction:" destination="jy6-ar-zBd" id="UPD-Ay-ybZ"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="0XX-qL-kyn">
+                                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="save" id="0XX-qL-kyn">
                                             <connections>
                                                 <action selector="addButtonAction:" destination="jy6-ar-zBd" id="yNn-Zs-Pvd"/>
                                             </connections>
@@ -150,10 +153,11 @@
                             <constraint firstItem="B3T-hF-diF" firstAttribute="centerX" secondItem="jvw-tE-Nbc" secondAttribute="centerX" id="z7K-mR-bHf"/>
                         </constraints>
                     </view>
-                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <outlet property="addTextField" destination="WTl-Tl-yZB" id="TD5-MX-Uot"/>
                         <outlet property="backButton" destination="pCb-KS-bZ1" id="Rt6-o0-SmI"/>
+                        <outlet property="saveButton" destination="0XX-qL-kyn" id="t5j-82-Pjf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L4L-rX-KbO" userLabel="First Responder" sceneMemberID="firstResponder"/>
